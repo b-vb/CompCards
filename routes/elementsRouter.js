@@ -1,72 +1,74 @@
-const express = require('express'),
-    router = express.Router();
+const express = require('express');
+const db = require('../config/db');
 
-const sequelize = require('../config/databaseConnection');
-const Elements = sequelize.import(__dirname + "./../models/elements");
+const router = express.Router();
 
 // invoked for any requested passed to this router
-router.use(function (req, res, next) {
+router.use((req, res, next) => {
     // .. some logic here .. like any other middleware
     next();
 });
 
-//Get all elements from database
-router.get('/', function (req, res, next) {
-    Elements.findAll().then(elements => {
-        res.send(elements)
-    })
-})
+// Get all elements from database
+router.get('/', (req, res) => {
+    db.elements.findAll().then((elements) => {
+        res.send(elements);
+    }).catch((err) => {
+        console.error(err);
+    });
+});
 
-//Get element by Id from database
-router.get('/:elementId', function (req, res, next) {
-    Elements.findById(req.params.elementId).then(elements => {
-        res.send(elements)
-    })
-})
+// Get element by Id from database
+router.get('/:elementId', (req, res) => {
+    db.elements.findById(req.params.elementId).then((elements) => {
+        res.send(elements);
+    }).catch((err) => {
+        console.error(err);
+    });
+});
 
-//Save element in database
-router.post('/new', function (req, res, next) {
-    const newElement = Elements.create({
+// Save element in database
+router.post('/new', (req, res) => {
+    db.elements.create({
         name_en: req.body.name_en,
         name_nl: req.body.name_nl,
+        position: req.body.position,
         fig_code: req.body.fig_code,
+        position_code: req.body.position_code,
         diff_trampoline: req.body.diff_trampoline,
-        diff_dmt: req.body.diff_dmt
-    }).then(
-        res.sendStatus(200)
-    ).catch(err => {
+        diff_dmt: req.body.diff_dmt,
+    }).then(res.sendStatus(200)).catch((err) => {
         console.error(err);
-    })
-})
+    });
+});
 
-//Update element in database
-router.put('/:elementId', function (req, res, next) {
-    Elements.findById(req.params.elementId).then(element => {
+// Update element in database
+router.put('/:elementId', (req, res) => {
+    db.elements.findById(req.params.elementId).then((element) => {
         element.update({
             name_en: req.body.name_en,
             name_nl: req.body.name_nl,
+            position: req.body.position,
             fig_code: req.body.fig_code,
+            position_code: req.body.position_code,
             diff_trampoline: req.body.diff_trampoline,
-            diff_dmt: req.body.diff_dmt
-        }).then(
-            res.sendStatus(200)
-        ).catch(err => {
+            diff_dmt: req.body.diff_dmt,
+        }).then(res.sendStatus(200)).catch((err) => {
             console.error(err);
-        })
-    })
-})
+        });
+    });
+});
 
-//Delete element from database
-router.delete('/:elementId', function (req, res, next) {
-    Elements.destroy({
+// Delete element from database
+router.delete('/:elementId', (req, res) => {
+    db.elements.destroy({
         where: {
-            element_id: req.params.elementId
-        }
-    }).then(element => {
-        res.sendStatus(200);
-    }).catch(err => {
-        console.log(err);
-    })
-})
+            id: req.params.elementId,
+        },
+    }).then(res.sendStatus(200))
+        .catch((err) => {
+            console.error(err);
+        });
+});
 
 module.exports = router;

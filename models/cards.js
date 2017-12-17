@@ -1,40 +1,42 @@
-module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('cards', {
-    card_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+module.exports = (connection, DataTypes) => connection.define('cards', {
+    id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
     },
-    date_created: {
-      type: DataTypes.DATEONLY,
-      allowNull: false
+    user_id: {
+        type: DataTypes.UUID,
+        allowNull: false,
     },
     name: {
-      type: DataTypes.STRING(50),
-      allowNull: false
+        type: DataTypes.STRING(50),
+        allowNull: false,
     },
     compulsory_routine: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'routines',
-        key: 'routine_id'
-      }
+        type: DataTypes.UUID,
+        references: {
+            model: 'routines',
+            key: 'id',
+        },
+        allowNull: false,
     },
     optional_routine: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'routines',
-        key: 'routine_id'
-      }
+        type: DataTypes.UUID,
+        references: {
+            model: 'routines',
+            key: 'id',
+        },
+        allowNull: false,
     },
     level: {
-      type: DataTypes.STRING(3),
-      allowNull: false
-    }
-  }, {
-    tableName: 'cards'
-  });
-};
+        type: DataTypes.STRING(3),
+        allowNull: false,
+    },
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    updated_at: DataTypes.DATE,
+    deleted_at: DataTypes.DATE,
+});

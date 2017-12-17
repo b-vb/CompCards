@@ -1,100 +1,102 @@
-module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('routines', {
-    1: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+module.exports = (connection, DataTypes) => connection.define('routines', {
+    id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
     },
-    2: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_1: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    3: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_2: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    4: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_3: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    5: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_4: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    6: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_5: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    7: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_6: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    8: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_7: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    9: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_8: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    10: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'elements',
-        key: 'element_id'
-      }
+    element_9: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
-    routine_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+    element_10: {
+        type: DataTypes.UUID,
+        references: {
+            model: 'elements',
+            key: 'id',
+        },
+        allowNull: false,
     },
     diff1: {
-      type: DataTypes.INTEGER(2),
-      allowNull: true
+        type: DataTypes.INTEGER(3),
+        allowNull: true,
     },
     diff2: {
-      type: DataTypes.INTEGER(2),
-      allowNull: true
-    }
-  }, {
-    tableName: 'routines'
-  });
-};
+        type: DataTypes.INTEGER(3),
+        allowNull: true,
+    },
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    updated_at: DataTypes.DATE,
+    deleted_at: DataTypes.DATE,
+});
