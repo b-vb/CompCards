@@ -1,32 +1,42 @@
-module.exports = function (sequelize, DataTypes) {
-  return sequelize.define('elements', {
-    element_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+module.exports = (connection, DataTypes) => connection.define('elements', {
+    id: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
     },
     name_en: {
-      type: DataTypes.STRING(30),
-      allowNull: false
+        type: DataTypes.STRING(30),
+        allowNull: false,
     },
     name_nl: {
-      type: DataTypes.STRING(30),
-      allowNull: false
+        type: DataTypes.STRING(30),
+        allowNull: false,
     },
     fig_code: {
-      type: DataTypes.STRING(15),
-      allowNull: false
+        type: DataTypes.STRING(15),
+        allowNull: false,
+    },
+    position_code: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
+    },
+    position: {
+        type: DataTypes.STRING(15),
+        allowNull: false,
     },
     diff_trampoline: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
     },
     diff_dmt: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false
-    }
-  }, {
-    tableName: 'elements'
-  });
-};
+        type: DataTypes.INTEGER(11),
+        allowNull: false,
+    },
+    created_at: {
+        type: DataTypes.DATE,
+        allowNull: false,
+    },
+    updated_at: DataTypes.DATE,
+    deleted_at: DataTypes.DATE,
+});
