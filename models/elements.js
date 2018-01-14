@@ -6,11 +6,11 @@ module.exports = (connection, DataTypes) => connection.define('elements', {
         defaultValue: DataTypes.UUIDV4,
     },
     name_en: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(255),
         allowNull: false,
     },
     name_nl: {
-        type: DataTypes.STRING(30),
+        type: DataTypes.STRING(255),
         allowNull: false,
     },
     fig_code: {
@@ -27,11 +27,11 @@ module.exports = (connection, DataTypes) => connection.define('elements', {
     },
     diff_trampoline: {
         type: DataTypes.INTEGER(11),
-        allowNull: false,
+        allowNull: true,
     },
     diff_dmt: {
         type: DataTypes.INTEGER(11),
-        allowNull: false,
+        allowNull: true,
     },
     created_at: {
         type: DataTypes.DATE,

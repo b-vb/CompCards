@@ -32,7 +32,7 @@ const cardsRouter = require('./routes/cardsRouter');
 app.use('/cards', cardsRouter);
 
 db.connection.sync({
-    force: true,
+    // force: true,
 }).then(() => {
     app.listen(app.get('port'), () => console.error(`✔️ - Compcards is listening on port ${app.get('port')}`));
 }).catch((err) => {
